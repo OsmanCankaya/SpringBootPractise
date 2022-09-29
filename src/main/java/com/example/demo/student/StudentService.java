@@ -13,16 +13,25 @@ import java.util.Optional;
 public class StudentService {
 
     @Autowired
-    private final  StudentRepository studentRepository;
+    private final StudentRepository studentRepository;
 
-    public List<Student> getStudents(){
+    public List<Student> getStudents() {
         return studentRepository.findAll();
     }
 
     public void addNewStudent(Student student) {
         Optional<Student> studentByIdEmail = studentRepository.findStudentByIdEmail(student.getEmail());
-        if(studentByIdEmail.isPresent())
+        if (studentByIdEmail.isPresent())
             throw new IllegalStateException("email taken");
         studentRepository.save(student);
+    }
+
+    public void deleteStudent(Long id) {
+        boolean exists = studentRepository.existsById(id);
+        if (!exists) {
+            throw new IllegalStateException("Student with id " + id + " does not exist");
+        }
+        studentRepository.deleteById(id);
+
     }
 }
