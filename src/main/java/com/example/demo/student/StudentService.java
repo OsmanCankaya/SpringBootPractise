@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 //lombok
@@ -16,5 +17,12 @@ public class StudentService {
 
     public List<Student> getStudents(){
         return studentRepository.findAll();
+    }
+
+    public void addNewStudent(Student student) {
+        Optional<Student> studentByIdEmail = studentRepository.findStudentByIdEmail(student.getEmail());
+        if(studentByIdEmail.isPresent())
+            throw new IllegalStateException("email taken");
+        studentRepository.save(student);
     }
 }
