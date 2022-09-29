@@ -1,19 +1,20 @@
 package com.example.demo.student;
 
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.List;
 
 @Service
+//lombok
+@AllArgsConstructor
 public class StudentService {
+
+    @Autowired
+    private final  StudentRepository studentRepository;
+
     public List<Student> getStudents(){
-        return List.of(new Student(
-                1L,
-                "Osman",
-                "osmancankaya@gmail.com",
-                LocalDate.of(2000, Month.JANUARY,1),
-                21));
+        return studentRepository.findAll();
     }
 }
