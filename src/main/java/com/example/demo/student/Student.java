@@ -8,6 +8,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.Period;
 
 //spring
 @Entity
@@ -16,7 +17,7 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@ToString(callSuper = true)
 public class Student {
 
     //Sequence yapısı, mysql deki autoincrement yapısına karşılık geliyor
@@ -31,16 +32,24 @@ public class Student {
             strategy = GenerationType.SEQUENCE,
             generator = "student_sequence"
     )
+
     private Long id;
     private String name;
     private String email;
     //date of birth
     private LocalDate dob;
+
+    //db'de görünmesi istemiyoruz
+    @Transient
     private Integer age;
 
     public Student(String name, String email, LocalDate dob) {
         this.name = name;
         this.email = email;
         this.dob = dob;
+    }
+
+    public Integer getAge(){
+        return Period.between(dob, LocalDate.now()).getYears();
     }
 }
