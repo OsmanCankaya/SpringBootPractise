@@ -1,0 +1,16 @@
+jar üzerinden projeyi çalıştırmak için:
+1-) maven tool windows -> demo -> Lifcycle -> install (çift tıkla)
+
+2-) Terminal tool windows'da aşağıdaki kodları sırası ile çalıştır
+    cd target
+    java -jar .\demo-0.0.1-SNAPSHOT.jar
+(üstteki komut satırın java -jar demo yazıp tab tuşuna basman yeterli)
+
+Artık proje jar üzerinden çalışıyor bu jar ı alıp server a atabilirsin
+
+NOT eğer port u değiştirmek istiyorsan
+    java -jar .\demo-0.0.1-SNAPSHOT.jar
+komut satırnın sonuna parametre olarak geçmen gerekiyor. Örnek:
+java -jar .\demo-0.0.1-SNAPSHOT.jar --server-port=8081
+
+NOT: terminal'de jar ı durdurmak için ctrl+c yapmak yeterli olmuyor enter a basmak gerekiyor
